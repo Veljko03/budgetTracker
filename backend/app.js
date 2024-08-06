@@ -1,11 +1,15 @@
 const express = require("express");
 const { db } = require("./db/db");
-const { router } = require("./routes/transactions");
+
+const { readdirSync } = require("fs");
+
 const app = express();
 require("dotenv").config();
-
+app.use(express.json());
 //routes
-router();
+readdirSync("./routes").map((route) =>
+  app.use("/api/v1", require("./routes/" + route))
+);
 
 const PORT = process.env.PORT;
 const server = () => {
