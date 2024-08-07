@@ -1,0 +1,18 @@
+GET http://localhost:5000/api/v1/get-expense
+
+###
+DELETE  http://localhost:5000/api/v1/delete-expense/66b3981eac2e42110326e37c
+
+
+###
+POST  http://localhost:5000/api/v1/add-expense
+Content-Type: application/json
+
+{
+    "title":"ovo je expense 2",
+    "amount":100,
+    "type":"dobar", 
+    "date":"10-10-2020", 
+    "category":"doabr",
+    "description":"nema"     
+}
