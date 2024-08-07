@@ -1,12 +1,15 @@
 GET http://localhost:5000/api/v1/get-incomes
 
 ###
+DELETE  http://localhost:5000/api/v1/delete-income/66b3919695568ee30691c8be
 
+
+###
 POST  http://localhost:5000/api/v1/add-income
 Content-Type: application/json
 
 {
-    "title":"prvi",
+    "title":"drugi",
     "amount":100,
     "type":"dobar", 
     "date":"10-10-2020", 
