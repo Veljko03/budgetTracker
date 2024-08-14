@@ -1,0 +1,10 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGear, faHome } from "@fortawesome/free-solid-svg-icons";
+import { faMoneyBill } from "@fortawesome/free-solid-svg-icons";
+import { faChartSimple } from "@fortawesome/free-solid-svg-icons";
+import { faShareFromSquare } from "@fortawesome/free-regular-svg-icons";
+export const dashboard = <FontAwesomeIcon icon={faHome} />;
+export const money = <FontAwesomeIcon icon={faMoneyBill} />;
+export const chart = <FontAwesomeIcon icon={faChartSimple} />;
+export const settings = <FontAwesomeIcon icon={faGear} />;
+export const singOut = <FontAwesomeIcon icon={faShareFromSquare} />;
