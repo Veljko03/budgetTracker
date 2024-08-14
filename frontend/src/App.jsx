@@ -2,7 +2,10 @@ import { useState, useEffect } from "react";
 import { MainLayout } from "./styles/Layouts";
 import Navigation from "./Components/Navigation/Navigation";
 import styled from "styled-components";
+import Incomes from "./Components/Incomes/Incomes";
 import Dashboard from "./Components/Dashboard/Dashboard";
+import Expences from "./Components/Expences/Expences";
+
 const AppStyled = styled.div`
   height: 100vh;
 
@@ -20,9 +23,18 @@ const AppStyled = styled.div`
   }
 `;
 
-const displayData = () => {
-  switch (active) {
+const DisplayData = ({ activeToShow }) => {
+  switch (activeToShow) {
     case 1:
+      return <Dashboard />;
+    case 2:
+      return <Dashboard />;
+    case 3:
+      return <Incomes />;
+    case 4:
+      return <Expences />;
+
+    default:
       return <Dashboard />;
   }
 };
@@ -32,7 +44,9 @@ const App = () => {
     <AppStyled className="App">
       <div style={MainLayout}>
         <Navigation active={active} setActive={setActive} />
-        <main>{displayData()}</main>
+        <main>
+          <DisplayData activeToShow={active} />
+        </main>
       </div>
     </AppStyled>
   );

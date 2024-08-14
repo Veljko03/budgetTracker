@@ -1,7 +1,12 @@
 import styled from "styled-components";
+import { InnerLayout } from "../../styles/Layouts";
 
 const Dashboard = () => {
-  return <DashboardStyled>Dashboard</DashboardStyled>;
+  return (
+    <InnerLayout>
+      <DashboardStyled>dashboard</DashboardStyled>
+    </InnerLayout>
+  );
 };
 
 const DashboardStyled = styled.div``;
