@@ -12,5 +12,6 @@ export const GlobalStyle = createGlobalStyle`
     body{
         font-size:clamp(1rem, 1.5v2,1.2rem);
         overflow: hidden;
+        background: rgba(240, 240, 240);
     }
 `;

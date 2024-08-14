@@ -18,8 +18,16 @@ export const GlobalProvider = ({ children }) => {
       });
   };
 
+  const getIncomes = async () => {
+    const response = await axios.get(`${BASE_URL}get-incomes`).catch((err) => {
+      setError(err.response.data.message);
+    });
+    console.log(response.data);
+    setIncomes(response.data);
+  };
+
   return (
-    <GlobalContext.Provider value={{ addIncome }}>
+    <GlobalContext.Provider value={{ addIncome, getIncomes, incomes }}>
       {children}
     </GlobalContext.Provider>
   );
