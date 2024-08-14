@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { MainLayout } from "./styles/Layouts";
 import Navigation from "./Components/Navigation/Navigation";
 import styled from "styled-components";
+import Dashboard from "./Components/Dashboard/Dashboard";
 const AppStyled = styled.div`
   height: 100vh;
 
@@ -19,13 +20,19 @@ const AppStyled = styled.div`
   }
 `;
 
+const displayData = () => {
+  switch (active) {
+    case 1:
+      return <Dashboard />;
+  }
+};
 const App = () => {
   const [active, setActive] = useState(1);
   return (
     <AppStyled className="App">
       <div style={MainLayout}>
         <Navigation active={active} setActive={setActive} />
-        <main></main>
+        <main>{displayData()}</main>
       </div>
     </AppStyled>
   );
