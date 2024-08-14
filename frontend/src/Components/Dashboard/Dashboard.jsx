@@ -3,9 +3,9 @@ import { InnerLayout } from "../../styles/Layouts";
 
 const Dashboard = () => {
   return (
-    <InnerLayout>
-      <DashboardStyled>dashboard</DashboardStyled>
-    </InnerLayout>
+    <DashboardStyled>
+      <InnerLayout>Dashboard</InnerLayout>
+    </DashboardStyled>
   );
 };
 

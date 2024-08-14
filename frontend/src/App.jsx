@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Incomes from "./Components/Incomes/Incomes";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Expences from "./Components/Expences/Expences";
+import { useGlobalContext } from "./context/GlobalContext";
 
 const AppStyled = styled.div`
   height: 100vh;
@@ -40,6 +41,9 @@ const DisplayData = ({ activeToShow }) => {
 };
 const App = () => {
   const [active, setActive] = useState(1);
+
+  const global = useGlobalContext();
+  console.log(global);
   return (
     <AppStyled className="App">
       <div style={MainLayout}>
