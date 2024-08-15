@@ -5,27 +5,28 @@ import Form from "../Form/Form";
 import { useEffect } from "react";
 import IncomeItem from "../IncomeItem/IncomeItem";
 import { dollar } from "../../utils/icons";
+import ExpanseForm from "./ExpanseForm";
 
 const Expances = () => {
-  const { addIncome, incomes, getIncomes, deleteIncome, totalIncome } =
+  const { expenses, getExpanse, deleteExpense, totalExpanse } =
     useGlobalContext();
 
   useEffect(() => {
-    getIncomes();
+    getExpanse();
   }, []);
   return (
     <IncomesStyled>
       <InnerLayout className="a">
         <h1>Expances</h1>
         <h2 className="total-income">
-          Total expense is <span>${totalIncome()}</span>
+          Total expense is <span>${totalExpanse()}</span>
         </h2>
         <div className="income-content">
           <div className="form-container">
-            <Form />
+            <ExpanseForm />
           </div>
           <div className="incomes">
-            {incomes.map((income) => {
+            {expenses.map((income) => {
               console.log(income, "this is income");
               const { _id, title, amount, date, category, description } =
                 income;
@@ -38,7 +39,7 @@ const Expances = () => {
                   date={date}
                   description={description}
                   category={category}
-                  deleteItem={deleteIncome}
+                  deleteItem={deleteExpense}
                   color={"red"}
                 />
               );
