@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { calendar, comment, dollar, trash } from "../../utils/icons";
 import Button from "../Button/Button";
+
+var colorPoint = "";
+
 const IncomeItem = ({
   id,
   title,
@@ -11,7 +14,13 @@ const IncomeItem = ({
   deleteItem,
   indicatorColor,
   type,
+  color,
 }) => {
+  if (color == "red") {
+    colorPoint = color;
+  } else {
+    colorPoint = "green";
+  }
   return (
     <IncomeItemStyled>
       <div className="icon"></div>
@@ -37,6 +46,7 @@ const IncomeItem = ({
               bRad={"50%"}
               bg={"gray"}
               color={"black"}
+              onClick={() => deleteItem(id)}
             />
           </div>
         </div>
@@ -61,7 +71,7 @@ const IncomeItemStyled = styled.div`
     width: 20px;
     height: 20px;
     border-radius: 20px;
-    color: green;
+    color: ${colorPoint};
     background: green;
     display: flex;
     align-items: center;

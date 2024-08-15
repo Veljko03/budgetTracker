@@ -4,9 +4,11 @@ import { useGlobalContext } from "../../context/GlobalContext";
 import Form from "../Form/Form";
 import { useEffect } from "react";
 import IncomeItem from "../IncomeItem/IncomeItem";
+import { dollar } from "../../utils/icons";
 
 const Incomes = () => {
-  const { addIncome, incomes, getIncomes } = useGlobalContext();
+  const { addIncome, incomes, getIncomes, deleteIncome, totalIncome } =
+    useGlobalContext();
 
   useEffect(() => {
     getIncomes();
@@ -15,6 +17,9 @@ const Incomes = () => {
     <IncomesStyled>
       <InnerLayout className="a">
         <h1>Incomes</h1>
+        <h2 className="total-income">
+          Total income is <span>${totalIncome()}</span>
+        </h2>
         <div className="income-content">
           <div className="form-container">
             <Form />
@@ -22,17 +27,19 @@ const Incomes = () => {
           <div className="incomes">
             {incomes.map((income) => {
               console.log(income, "this is income");
-              const { _id, title, amaunt, date, category, description } =
+              const { _id, title, amount, date, category, description } =
                 income;
               return (
                 <IncomeItem
                   key={_id}
                   id={_id}
                   title={title}
-                  amount={amaunt}
+                  amount={amount}
                   date={date}
                   description={description}
                   category={category}
+                  deleteItem={deleteIncome}
+                  color={"green"}
                 />
               );
             })}
@@ -45,6 +52,10 @@ const Incomes = () => {
 
 const IncomesStyled = styled.div`
   display: flex;
+  h1 {
+    color: green;
+    font-size: 40px;
+  }
   overflow: auto;
   .total-income {
     display: flex;
@@ -61,7 +72,7 @@ const IncomesStyled = styled.div`
     span {
       font-size: 2.5rem;
       font-weight: 800;
-      color: var(--color-green);
+      color: green;
     }
   }
   .a {
