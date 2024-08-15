@@ -8,7 +8,7 @@ import { dollar } from "../../utils/icons";
 import ExpanseForm from "./ExpanseForm";
 
 const Expances = () => {
-  const { expenses, getExpanse, deleteExpense, totalExpanse } =
+  const { expenses, getExpanse, deleteExpanse, totalExpanse } =
     useGlobalContext();
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const Expances = () => {
                   date={date}
                   description={description}
                   category={category}
-                  deleteItem={deleteExpense}
+                  deleteItem={deleteExpanse}
                   color={"red"}
                 />
               );
