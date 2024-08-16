@@ -17,11 +17,22 @@ const IncomeItem = ({
   type,
   color,
 }) => {
-  const colorPoint = color === "red" ? "red" : "green";
-
+  let colorPoint = color === "red" ? "red" : "green";
+  console.log("vlolor point", type);
   return (
     <IncomeItemStyled>
-      <div className="icon" style={{ color: { colorPoint } }}></div>
+      <div
+        style={{
+          borderRadius: "20px",
+          alignItems: "center",
+          background: colorPoint,
+          width: "20px",
+          height: "20px",
+          display: "flex",
+          justifyContent: "center",
+          border: "2px solid #ffffff",
+        }}
+      ></div>
       <div className="content">
         <h5>{title}</h5>
         <div className="inner-content">
@@ -70,7 +81,6 @@ const IncomeItemStyled = styled.div`
     height: 20px;
     border-radius: 20px;
 
-    background: green;
     display: flex;
     align-items: center;
     justify-content: center;
