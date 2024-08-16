@@ -28,7 +28,7 @@ const Expances = () => {
           <div className="incomes">
             {expenses.map((income) => {
               console.log(income, "this is income");
-              const { _id, title, amount, date, category, description } =
+              const { _id, title, amount, date, category, description, type } =
                 income;
               return (
                 <IncomeItem
@@ -41,6 +41,7 @@ const Expances = () => {
                   category={category}
                   deleteItem={deleteExpanse}
                   color={"red"}
+                  type={"expense"}
                 />
               );
             })}

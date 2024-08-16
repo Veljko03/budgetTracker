@@ -4,6 +4,7 @@ import ChartShow from "../Chart/Chart";
 import { useGlobalContext } from "../../context/GlobalContext";
 import { dollar } from "../../utils/icons";
 import { useEffect } from "react";
+import History from "../History/History";
 
 const Dashboard = () => {
   const { getIncomes, getExpanse, totalExpanse, totalIncome, totalBalance } =
@@ -40,7 +41,9 @@ const Dashboard = () => {
                 </p>
               </div>
             </div>
-            <div className="history-con"></div>
+            <div className="history-con">
+              <History />
+            </div>
           </div>
         </div>
       </InnerLayout>
