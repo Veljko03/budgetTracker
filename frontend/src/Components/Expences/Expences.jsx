@@ -15,7 +15,7 @@ const Expances = () => {
     getExpanse();
   }, []);
   return (
-    <IncomesStyled>
+    <ExpenseStyled>
       <InnerLayout className="a">
         <h1>Expances</h1>
         <h2 className="total-income">
@@ -47,14 +47,14 @@ const Expances = () => {
           </div>
         </div>
       </InnerLayout>
-    </IncomesStyled>
+    </ExpenseStyled>
   );
 };
 
-const IncomesStyled = styled.div`
+const ExpenseStyled = styled.div`
   display: flex;
   h1 {
-    color: green;
+    color: red;
     font-size: 40px;
   }
   overflow: auto;
@@ -73,7 +73,7 @@ const IncomesStyled = styled.div`
     span {
       font-size: 2.5rem;
       font-weight: 800;
-      color: green;
+      color: red;
     }
   }
   .a {

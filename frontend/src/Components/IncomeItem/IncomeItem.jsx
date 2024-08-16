@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { calendar, comment, dollar, trash } from "../../utils/icons";
 import Button from "../Button/Button";
+import { dateFormat } from "../../utils/dateFormat";
 
-var colorPoint = "";
+var colorPoint = "blue";
 
 const IncomeItem = ({
   id,
@@ -16,14 +17,11 @@ const IncomeItem = ({
   type,
   color,
 }) => {
-  if (color == "red") {
-    colorPoint = color;
-  } else {
-    colorPoint = "green";
-  }
+  const colorPoint = color === "red" ? "red" : "green";
+
   return (
     <IncomeItemStyled>
-      <div className="icon"></div>
+      <div className="icon" style={{ color: { colorPoint } }}></div>
       <div className="content">
         <h5>{title}</h5>
         <div className="inner-content">
@@ -32,7 +30,7 @@ const IncomeItem = ({
               {dollar} {amount}
             </p>
             <p>
-              {calendar} {date}
+              {calendar} {dateFormat(date)}
             </p>
             <p>
               {comment}
@@ -71,7 +69,7 @@ const IncomeItemStyled = styled.div`
     width: 20px;
     height: 20px;
     border-radius: 20px;
-    color: ${colorPoint};
+
     background: green;
     display: flex;
     align-items: center;

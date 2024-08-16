@@ -47,7 +47,7 @@ const ExpanseForm = () => {
           type="text"
           name="title"
           value={title}
-          placeholder="Sallary Title"
+          placeholder="Expense Title"
           onChange={handleInput("title")}
         />
       </div>
@@ -56,7 +56,7 @@ const ExpanseForm = () => {
           type="text"
           value={amount}
           id="amount"
-          placeholder="Sallary Amount"
+          placeholder="Expense Amount"
           onChange={handleInput("amount")}
         />
       </div>
@@ -82,13 +82,13 @@ const ExpanseForm = () => {
           <option value="" disabled>
             Select Option
           </option>
-          <option value="salary">Salary</option>
-          <option value="freelancing">Freelancing</option>
-          <option value="investments">Investiments</option>
-          <option value="stocks">Stocks</option>
-          <option value="bitcoin">Bitcoin</option>
-          <option value="bank">Bank Transfer</option>
-          <option value="youtube">Youtube</option>
+          <option value="home">Home</option>
+          <option value="loan">Loan</option>
+          <option value="food">Food</option>
+          <option value="cloades">Cloades</option>
+          <option value="bank">Bank</option>
+          <option value="restaurant">Restaurant</option>
+          <option value="membership">Membership</option>
           <option value="other">Other</option>
         </select>
       </div>
@@ -105,7 +105,7 @@ const ExpanseForm = () => {
       </div>
       <div className="submit-btn">
         <Button
-          name={"Add Income"}
+          name={"Add Expense"}
           icon={plus}
           bPad={".8rem 1.6rem"}
           bRad={"30px"}
@@ -161,7 +161,7 @@ const Formstyled = styled.form`
     button {
       box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
       &:hover {
-        background: green !important;
+        background: red !important;
       }
     }
   }
