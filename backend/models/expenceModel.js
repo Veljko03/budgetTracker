@@ -33,6 +33,10 @@ const ExpenceSchema = new mongoose.Schema(
       trim: true,
       maxLength: 50,
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   { timestamps: true }
 );

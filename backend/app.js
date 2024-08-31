@@ -1,9 +1,11 @@
 const express = require("express");
 const { db } = require("./db/db");
+const cors = require("cors");
 
 const { readdirSync } = require("fs");
 
 const app = express();
+app.use(cors());
 require("dotenv").config();
 app.use(express.json());
 //routes
