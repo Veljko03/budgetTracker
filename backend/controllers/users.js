@@ -35,8 +35,11 @@ exports.addUser = async (request, response) => {
 
 exports.getUsers = async (reqest, response) => {
   try {
-    const expense = await User.find().sort({ createdAt: -1 });
-    response.status(200).json(expense);
+    const users = await User.find()
+      .populate("expenses")
+      .populate("incomes")
+      .sort({ createdAt: -1 });
+    response.status(200).json(users);
   } catch (error) {
     response.status(500).json({ message: "Server Error" });
   }
