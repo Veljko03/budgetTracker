@@ -1,16 +1,28 @@
 const ExpenseSchema = require("../models/expenceModel");
+const User = require("../models/usersModel");
 
 exports.addExpence = async (request, response) => {
-  const { title, amount, category, description, date } = request.body;
+  const { title, amount, category, description, date, userId } = request.body;
 
-  const expense = ExpenseSchema({
-    title,
-    amount,
-    category,
-    description,
-    date,
-  });
   try {
+    if (!userId) {
+      return response.status(400).json({ message: "User ID is required!" });
+    }
+
+    // Pronađi korisnika pomoću userId
+    const user = await User.findById(userId);
+    if (!user) {
+      return response.status(404).json({ message: "User not found!" });
+    }
+    console.log(user._id.id, "this is user");
+    const expense = ExpenseSchema({
+      title,
+      amount,
+      category,
+      description,
+      date,
+      user: userId,
+    });
     if (!title || !amount || !category || !description || !date) {
       return response.status(400).json({ message: "All fields are required!" });
     }
@@ -19,12 +31,14 @@ exports.addExpence = async (request, response) => {
         .status(400)
         .json({ message: "Amount must be possitive number!" });
     }
+    //console.log(expense._id);
+    user.expenses = user.expenses.concat(expense._id);
     await expense.save();
+    await user.save();
     response.status(200).json({ message: "Expense Added" });
   } catch (error) {
     response.status(500).json({ message: "Server Error" });
   }
-  console.log(expense);
 };
 
 exports.getExpences = async (request, response) => {

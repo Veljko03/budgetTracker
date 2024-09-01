@@ -9,10 +9,11 @@ POST  http://localhost:5000/api/v1/add-expense
 Content-Type: application/json
 
 {
-    "title":"ovo je expense 2",
+    "title":"ovo je expense 3",
     "amount":100,
     "type":"dobar", 
     "date":"10-10-2020", 
     "category":"doabr",
-    "description":"nema"     
+    "description":"nema",
+    "userId":"66d4c187519258410426102f"     
 }

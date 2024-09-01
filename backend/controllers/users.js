@@ -32,3 +32,12 @@ exports.addUser = async (request, response) => {
     response.status(500).json({ message: "Server Error" });
   }
 };
+
+exports.getUsers = async (reqest, response) => {
+  try {
+    const expense = await User.find().sort({ createdAt: -1 });
+    response.status(200).json(expense);
+  } catch (error) {
+    response.status(500).json({ message: "Server Error" });
+  }
+};
