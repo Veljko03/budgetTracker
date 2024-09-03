@@ -9,10 +9,11 @@ POST  http://localhost:5000/api/v1/add-income
 Content-Type: application/json
 
 {
-    "title":"drugi",
+  "title":"ovo je income 2",
     "amount":100,
     "type":"dobar", 
     "date":"10-10-2020", 
     "category":"doabr",
-    "description":"nema"     
+    "description":"nema",
+    "userId":"66d4c187519258410426102f"     
 }
