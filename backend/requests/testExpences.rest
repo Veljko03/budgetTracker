@@ -7,13 +7,13 @@ DELETE  http://localhost:5000/api/v1/delete-expense/66b3981eac2e42110326e37c
 ###
 POST  http://localhost:5000/api/v1/add-expense
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hcmtvMjEyIiwiaWQiOiI2NmQ0YzE4NzUxOTI1ODQxMDQyNjEwMmYiLCJpYXQiOjE3MjUzNzc2MzJ9.qFTEBdULQ6fs03_NSF9UmS-E05_Ep8h9wbk6xfsI71E
 
 {
-    "title":"ovo je expense 3",
+    "title":"ovo je expence 68",
     "amount":100,
     "type":"dobar", 
     "date":"10-10-2020", 
     "category":"doabr",
-    "description":"nema",
-    "userId":"66d4c187519258410426102f"     
+    "description":"nema"   
 }
