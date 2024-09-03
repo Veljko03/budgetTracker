@@ -1,27 +1,47 @@
 const incomeSchema = require("../models/incomeModel");
 const User = require("../models/usersModel");
+const jwt = require("jsonwebtoken");
+//const { use } = require("../routes/transactions");
+
+const getTokenFrom = (request) => {
+  const authorization = request.get("authorization");
+  console.log(authorization, "auth");
+  if (authorization && authorization.startsWith("Bearer ")) {
+    return authorization.replace("Bearer ", "");
+  }
+  return null;
+};
 
 exports.addIncome = async (request, response) => {
-  const { title, amount, category, description, date, userId } = request.body;
+  const { title, amount, category, description, date } = request.body;
 
   try {
-    if (!userId) {
-      return response.status(400).json({ message: "User ID is required!" });
+    // if (!userId) {
+    //   return response.status(400).json({ message: "User ID is required!" });
+    // }
+
+    // // Pronađi korisnika pomoću userId
+    // const user = await User.findById(userId);
+    // if (!user) {
+    //   return response.status(404).json({ message: "User not found!" });
+    // }
+
+    const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET);
+    if (!decodedToken.id) {
+      return response.status(401).json({ error: "token invalid" });
     }
 
-    // Pronađi korisnika pomoću userId
-    const user = await User.findById(userId);
-    if (!user) {
-      return response.status(404).json({ message: "User not found!" });
-    }
+    const user = await User.findById(decodedToken.id);
 
-    const income = incomeSchema({
+    // console.log(user);
+
+    const income = new incomeSchema({
       title,
       amount,
       category,
       description,
       date,
-      user: userId,
+      user: user._id,
     });
     if (!title || !amount || !category || !description || !date) {
       return response.status(400).json({ message: "All fields are required!" });
