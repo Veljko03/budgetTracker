@@ -107,6 +107,15 @@ export const GlobalProvider = ({ children }) => {
     });
     return history;
   };
+  const register = async (userData) => {
+    try {
+      const response = await axios.post(`${BASE_URL}/add-user`, userData);
+      return response.data;
+    } catch (error) {
+      console.error("Registration error", error);
+      throw error;
+    }
+  };
 
   console.log(totalIncome(), "total income is");
   return (
@@ -125,6 +134,7 @@ export const GlobalProvider = ({ children }) => {
         totalBalance,
         transactionHistory,
         login,
+        register,
       }}
     >
       {children}
