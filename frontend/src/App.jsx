@@ -6,6 +6,7 @@ import Incomes from "./Components/Incomes/Incomes";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Expences from "./Components/Expences/Expences";
 import { useGlobalContext } from "./context/GlobalContext";
+import Login from "./Components/Login";
 
 const AppStyled = styled.div`
   height: 100vh;
@@ -42,16 +43,39 @@ const DisplayData = ({ activeToShow }) => {
 const App = () => {
   const [active, setActive] = useState(1);
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Dodaj stanje prijave
+
+  useEffect(() => {
+    // Proveri da li postoji token u localStorage prilikom učitavanja aplikacije
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+  };
+
+  console.log(isLoggedIn, "SetloggedIn");
   const global = useGlobalContext();
   console.log(global);
   return (
     <AppStyled className="App">
-      <div style={MainLayout}>
-        <Navigation active={active} setActive={setActive} />
-        <main>
-          <DisplayData activeToShow={active} />
-        </main>
-      </div>
+      {isLoggedIn ? (
+        <div style={MainLayout}>
+          <Navigation
+            active={active}
+            setActive={setActive}
+            handleLogout={handleLogout}
+          />
+          <main>
+            <DisplayData activeToShow={active} />
+          </main>
+        </div>
+      ) : (
+        <Login setIsLoggedIn={setIsLoggedIn} /> // ako nije ulogovan
+      )}
     </AppStyled>
   );
 };

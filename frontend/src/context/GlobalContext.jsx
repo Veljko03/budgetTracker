@@ -76,6 +76,16 @@ export const GlobalProvider = ({ children }) => {
     getExpanse();
   };
 
+  const login = async (credentials) => {
+    try {
+      const response = await axios.post(BASE_URL, credentials);
+      return response.data;
+    } catch (err) {
+      console.error("Login error", err);
+      throw err;
+    }
+  };
+
   const totalExpanse = () => {
     let total = 0;
     console.log(incomes);
@@ -114,6 +124,7 @@ export const GlobalProvider = ({ children }) => {
         expenses,
         totalBalance,
         transactionHistory,
+        login,
       }}
     >
       {children}

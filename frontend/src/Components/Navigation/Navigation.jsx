@@ -79,7 +79,7 @@ const NavStyled = styled.nav`
   }
 `;
 
-function Navigation({ active, setActive }) {
+function Navigation({ active, setActive, handleLogout }) {
   return (
     <NavStyled>
       <div className="user-con">
@@ -104,7 +104,7 @@ function Navigation({ active, setActive }) {
         })}
       </ul>
       <div className="bottom-nav">
-        <li>{singOut} Singout</li>
+        <li onClick={handleLogout}>{singOut} Signout</li>
       </div>
     </NavStyled>
   );
