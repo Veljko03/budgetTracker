@@ -44,12 +44,15 @@ const App = () => {
   const [active, setActive] = useState(1);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Dodaj stanje prijave
+  const { getToken } = useGlobalContext();
 
   useEffect(() => {
     // Proveri da li postoji token u localStorage prilikom učitavanja aplikacije
     const token = localStorage.getItem("token");
+
     if (token) {
       setIsLoggedIn(true);
+      getToken(token);
     }
   }, []);
   const handleLogout = () => {

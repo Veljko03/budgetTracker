@@ -9,7 +9,6 @@ const History = () => {
       <h2>Recent History</h2>
       {history.map((item) => {
         const { _id, title, amount, type } = item;
-        console.log("this i typeee,", type);
         return (
           <div key={_id} className="history-item">
             <p

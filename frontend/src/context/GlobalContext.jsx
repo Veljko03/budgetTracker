@@ -9,10 +9,24 @@ export const GlobalProvider = ({ children }) => {
   const [incomes, setIncomes] = useState([]);
   const [expenses, setExpanses] = useState([]);
   const [error, setError] = useState(null);
+  const [token, setToken] = useState("");
+
+  const getToken = (newToken) => {
+    setToken(`Bearer ${newToken}`);
+  };
+
+  console.log("ovo je token ", token);
+
   //Incomes
   const addIncome = async (income) => {
+    const config = {
+      headers: { Authorization: token },
+    };
+    console.log("this is token ", token);
+    console.log("this is config ", config);
+
     const response = await axios
-      .post(`${BASE_URL}add-income`, income)
+      .post(`${BASE_URL}add-income`, income, config)
       .catch((err) => {
         setError(err.response.data.message);
       });
@@ -23,12 +37,10 @@ export const GlobalProvider = ({ children }) => {
     const response = await axios.get(`${BASE_URL}get-incomes`).catch((err) => {
       setError(err.response.data.message);
     });
-    console.log(response.data);
     setIncomes(response.data);
   };
 
   const deleteIncome = async (id) => {
-    console.log("deleting item");
     const response = await axios
       .delete(`${BASE_URL}delete-income/${id}`)
       .catch((err) => {
@@ -39,19 +51,20 @@ export const GlobalProvider = ({ children }) => {
 
   const totalIncome = () => {
     let total = 0;
-    console.log(incomes);
     incomes.forEach((income) => {
       total += income.amount;
     });
-    console.log(total, "total");
     return total;
   };
 
   //Expanse
   //
   const addExpanse = async (expanse) => {
+    const config = {
+      headers: { Authorization: token },
+    };
     const response = await axios
-      .post(`${BASE_URL}add-expense`, expanse)
+      .post(`${BASE_URL}add-expense`, expanse, config)
       .catch((err) => {
         setError(err.response.data.message);
       });
@@ -62,12 +75,10 @@ export const GlobalProvider = ({ children }) => {
     const response = await axios.get(`${BASE_URL}get-expense`).catch((err) => {
       setError(err.response.data.message);
     });
-    console.log(response.data);
     setExpanses(response.data);
   };
 
   const deleteExpanse = async (id) => {
-    console.log("deleting item");
     const response = await axios
       .delete(`${BASE_URL}delete-expense/${id}`)
       .catch((err) => {
@@ -88,11 +99,9 @@ export const GlobalProvider = ({ children }) => {
 
   const totalExpanse = () => {
     let total = 0;
-    console.log(incomes);
     expenses.forEach((expanse) => {
       total += expanse.amount;
     });
-    console.log(total, "total");
     return total;
   };
 
@@ -117,7 +126,6 @@ export const GlobalProvider = ({ children }) => {
     }
   };
 
-  console.log(totalIncome(), "total income is");
   return (
     <GlobalContext.Provider
       value={{
@@ -135,6 +143,7 @@ export const GlobalProvider = ({ children }) => {
         transactionHistory,
         login,
         register,
+        getToken,
       }}
     >
       {children}

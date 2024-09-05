@@ -4,25 +4,24 @@ import { useGlobalContext } from "../context/GlobalContext";
 const Login = ({ setIsLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isSignUp, setIsSignUp] = useState(false); // Stanje za registraciju
-  const [name, setName] = useState(""); // Stanje za ime prilikom registracije
-  const [message, setMessage] = useState(""); // Stanje za prikazivanje poruka
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
 
-  const { login, register } = useGlobalContext();
+  const { login, register, getToken } = useGlobalContext();
 
-  // Funkcija za registraciju korisnika
   const handleRegister = async (event) => {
     event.preventDefault();
     try {
       const userData = { username, name, password };
-      const newUser = await register(userData); // Poziv nove funkcije za registraciju iz konteksta
+      const newUser = await register(userData);
       setMessage("Registracija uspešna! Sada se možete prijaviti.");
-      setIsSignUp(false); // Prebaci na login nakon uspešne registracije
+      setIsSignUp(false);
     } catch (error) {
       if (error.response && error.response.data && error.response.data.error) {
-        setMessage(`Greška: ${error.response.data.error}`);
+        setMessage(`Err: ${error.response.data.error}`);
       } else {
-        setMessage("Greška prilikom registracije. Pokušajte ponovo.");
+        setMessage("Registration error. Try again!");
       }
       console.error("Registration error:", error);
     }
@@ -36,12 +35,14 @@ const Login = ({ setIsLoggedIn }) => {
         username,
         password,
       });
-      console.log("user,", user);
+
       localStorage.setItem("token", user.token);
       setIsLoggedIn(true);
       setMessage("");
+
+      getToken(user.token);
     } catch (exception) {
-      setMessage("Neispravno korisničko ime ili lozinka."); // Prikaži grešku za neispravne kredencijale
+      setMessage("Invalid username or password");
       console.error(exception);
       setUsername("");
       setPassword("");
@@ -52,7 +53,6 @@ const Login = ({ setIsLoggedIn }) => {
     <div style={styles.container}>
       <h2 style={styles.heading}>{isSignUp ? "Sign Up" : "Login"}</h2>
       {message && <p style={styles.message}>{message}</p>}{" "}
-      {/* Prikaži poruku ako postoji */}
       <form
         onSubmit={isSignUp ? handleRegister : handleLogin}
         style={styles.form}
@@ -64,7 +64,7 @@ const Login = ({ setIsLoggedIn }) => {
           onChange={(e) => setUsername(e.target.value)}
           style={styles.input}
         />
-        {isSignUp && ( // Prikaži polje za ime samo prilikom registracije
+        {isSignUp && (
           <input
             type="text"
             placeholder="Name"
@@ -100,7 +100,6 @@ const Login = ({ setIsLoggedIn }) => {
   );
 };
 
-// CSS-in-JS stilovi
 const styles = {
   container: {
     display: "flex",
