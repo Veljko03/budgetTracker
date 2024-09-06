@@ -54,8 +54,10 @@ exports.getExpences = async (request, response) => {
       return response.status(401).json({ error: "token invalid" });
     }
 
-    const user = await User.findById(decodedToken.id).populate("expenses");
-    response.status(200).json(user.expenses);
+    const expence = await ExpenseSchema.find({ user: decodedToken.id }) // Filtriraj po korisniku
+      .sort({ createdAt: -1 });
+
+    response.status(200).json(expence);
   } catch (error) {
     response.status(500).json({ message: "Server Error" });
   }
