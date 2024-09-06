@@ -2,6 +2,7 @@ import frog from "../../img/frog.png";
 import { menuItems } from "../../utils/menuItems";
 import { singOut } from "../../utils/icons";
 import styled from "styled-components";
+import { useGlobalContext } from "../../context/GlobalContext";
 
 const NavStyled = styled.nav`
   padding: 2rem 1.5rem;
@@ -77,16 +78,38 @@ const NavStyled = styled.nav`
       border-radius: 0 10px 10px 0;
     }
   }
+  .bottom-nav {
+    display: flex;
+    justify-content: left;
+
+    button {
+      background-color: #222260;
+      color: #fff;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: #ffffff;
+        color: #222260;
+        border: 2px solid #222260;
+      }
+    }
+  }
 `;
 
 function Navigation({ active, setActive, handleLogout }) {
+  const { user } = useGlobalContext();
   return (
     <NavStyled>
       <div className="user-con">
         <img src={frog} height="100px" alt="" />
         <div className="text">
-          <h2>Mike</h2>
-          <p>Your Money</p>
+          <h2>{user ? user : "Mike"}</h2>
         </div>
       </div>
       <ul className="menu-items">

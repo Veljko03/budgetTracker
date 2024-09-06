@@ -10,6 +10,7 @@ export const GlobalProvider = ({ children }) => {
   const [expenses, setExpanses] = useState([]);
   const [error, setError] = useState(null);
   const [token, setToken] = useState("");
+  const [user, setUser] = useState("");
 
   const getToken = (newToken) => {
     setToken(`Bearer ${newToken}`);
@@ -108,6 +109,8 @@ export const GlobalProvider = ({ children }) => {
   const login = async (credentials) => {
     try {
       const response = await axios.post(BASE_URL, credentials);
+
+      setUser(response.data.name);
       return response.data;
     } catch (err) {
       console.error("Login error", err);
@@ -162,6 +165,7 @@ export const GlobalProvider = ({ children }) => {
         login,
         register,
         getToken,
+        user,
       }}
     >
       {children}
