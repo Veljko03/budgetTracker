@@ -14,17 +14,6 @@ exports.addExpence = async (request, response) => {
   const { title, amount, category, description, date } = request.body;
 
   try {
-    // if (!userId) {
-    //   return response.status(400).json({ message: "User ID is required!" });
-    // }
-
-    // // Pronađi korisnika pomoću userId
-    // const user = await User.findById(userId);
-    // if (!user) {
-    //   return response.status(404).json({ message: "User not found!" });
-    // }
-    // console.log(user._id.id, "this is user");
-
     const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET);
     if (!decodedToken.id) {
       return response.status(401).json({ error: "token invalid" });
@@ -60,8 +49,13 @@ exports.addExpence = async (request, response) => {
 
 exports.getExpences = async (request, response) => {
   try {
-    const expense = await ExpenseSchema.find().sort({ createdAt: -1 });
-    response.status(200).json(expense);
+    const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET);
+    if (!decodedToken.id) {
+      return response.status(401).json({ error: "token invalid" });
+    }
+
+    const user = await User.findById(decodedToken.id).populate("expenses");
+    response.status(200).json(user.expenses);
   } catch (error) {
     response.status(500).json({ message: "Server Error" });
   }

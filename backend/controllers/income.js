@@ -62,7 +62,15 @@ exports.addIncome = async (request, response) => {
 
 exports.getIncomes = async (request, response) => {
   try {
-    const incomes = await incomeSchema.find().sort({ createdAt: -1 });
+    const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET);
+    if (!decodedToken.id) {
+      return response.status(401).json({ error: "token invalid" });
+    }
+
+    const incomes = await incomeSchema
+      .find({ user: decodedToken.id }) // Filtriraj po korisniku
+      .sort({ createdAt: -1 });
+
     response.status(200).json(incomes);
   } catch (error) {
     response.status(500).json({ message: "Server Error" });
