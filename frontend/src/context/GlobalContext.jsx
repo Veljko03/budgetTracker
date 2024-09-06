@@ -34,10 +34,19 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const getIncomes = async () => {
-    const response = await axios.get(`${BASE_URL}get-incomes`).catch((err) => {
-      setError(err.response.data.message);
-    });
-    setIncomes(response.data);
+    const config = {
+      headers: { Authorization: token },
+    };
+    const response = await axios
+      .get(`${BASE_URL}get-incomes`, config) // Prosledi config kao drugi parametar
+      .catch((err) => {
+        setError(err.response.data.message);
+      });
+    if (response.data) {
+      setIncomes(response.data);
+    } else {
+      setIncomes(0);
+    }
   };
 
   const deleteIncome = async (id) => {
@@ -72,10 +81,19 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const getExpanse = async () => {
-    const response = await axios.get(`${BASE_URL}get-expense`).catch((err) => {
-      setError(err.response.data.message);
-    });
-    setExpanses(response.data);
+    const config = {
+      headers: { Authorization: token },
+    };
+    const response = await axios
+      .get(`${BASE_URL}get-expense`, config) // Prosledi config kao drugi parametar
+      .catch((err) => {
+        setError(err.response.data.message);
+      });
+    if (response.data) {
+      setExpanses(response.data);
+    } else {
+      setExpanses(0);
+    }
   };
 
   const deleteExpanse = async (id) => {
