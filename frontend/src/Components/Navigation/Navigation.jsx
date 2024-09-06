@@ -104,7 +104,7 @@ function Navigation({ active, setActive, handleLogout }) {
         })}
       </ul>
       <div className="bottom-nav">
-        <li onClick={handleLogout}>{singOut} Signout</li>
+        <button onClick={handleLogout}>{singOut} Signout</button>
       </div>
     </NavStyled>
   );

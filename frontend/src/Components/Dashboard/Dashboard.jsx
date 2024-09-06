@@ -15,7 +15,7 @@ const Dashboard = () => {
     getExpanse();
   }, []);
   return (
-    <DashboardStyled>
+    <DashboardStyled totalBalance={totalBalance()}>
       <InnerLayout>
         <h1>All Transactions</h1>
         <div className="stats-con">
@@ -51,6 +51,59 @@ const Dashboard = () => {
   );
 };
 
-const DashboardStyled = styled.div``;
+const DashboardStyled = styled.div`
+  .stats-con {
+    display: flex; /* Prikazujemo sadržaj u jednom redu */
+    gap: 2rem; /* Razmak između kolona */
+    justify-content: space-between; /* Razmak između elemenata */
+    align-items: center; /* Poravnavanje elemenata po vertikali */
+  }
+
+  .chart-con {
+    flex: 2; /* Fleksibilni deo za grafikon */
+    display: flex;
+    flex-direction: column; /* Kolonski prikaz */
+    gap: 1.5rem;
+  }
+
+  .amount-con {
+    display: flex; /* Prikazujemo sadržaj u jednom redu */
+    gap: 2rem; /* Razmak između kolona */
+    justify-content: space-around; /* Razmak između elemenata */
+    align-items: center; /* Poravnavanje elemenata po vertikali */
+  }
+
+  .income,
+  .expense,
+  .balance {
+    text-align: center;
+    flex: 1; /* Svaka kolona zauzima jednaku širinu */
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: #f7f7f7; /* Svetla pozadina */
+  }
+
+  .income p {
+    color: green; /* Income je zelene boje */
+    font-weight: bold;
+  }
+
+  .expense p {
+    color: red; /* Expense je crvene boje */
+    font-weight: bold;
+  }
+
+  .balance p {
+    font-weight: bold;
+    color: ${({ theme, totalBalance }) =>
+      totalBalance >= 0
+        ? "green"
+        : "red"}; /* Zelena ako je pozitivan balans, crvena ako je negativan */
+  }
+
+  .history-con {
+    margin-top: 2rem;
+  }
+`;
 
 export default Dashboard;
